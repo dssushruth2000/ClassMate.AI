@@ -643,7 +643,15 @@ def submit_appointment():
     # Optionally return a thank you message (or redirect)
     return "<script>alert('Appointment submitted successfully!'); window.history.back();</script>"
 
-    
+from flask import send_file
+
+@app.route("/download_appointments")
+def download_appointments():
+    try:
+        return send_file("appointments/appointments.csv", as_attachment=True)
+    except Exception as e:
+        return f"Error: {e}"
+ 
 
 
 if __name__ == "__main__":
