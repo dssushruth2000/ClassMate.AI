@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Appointments</title>
+
+    <!-- 🔐 Password prompt script -->
+    <script>
+        const password = prompt("Enter admin password:");
+        if (password !== "chatbot123") {
+          alert("Access Denied.");
+          window.location.href = "/";
+        }
+    </script>
+
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            white-space: nowrap;
+        }
+        th {
+            background-color: #ffc904;
+        }
+        .center-heading {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="center-heading">Appointments Dashboard</h2>
+    <table id="appointments-table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        async function fetchAppointments() {
+            const response = await fetch("/admin/appointments-data");
+            const data = await response.json();
+    
+            const tbody = document.querySelector("#appointments-table tbody");
+            tbody.innerHTML = "";
+    
+            data.forEach(row => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${row["Timestamp"]}</td>
+                    <td>${row["Name"]}</td>
+                    <td>${row["Email"]}</td>
+                    <td>${row["Appointment Date"]}</td>
+                    <td>${row["Appointment Time"]}</td>
+                    <td>${row["Message"]}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    
+        // Initial load and refresh every 10 seconds
+        fetchAppointments();
+        setInterval(fetchAppointments, 10000);
+    </script>
+    
+</body>
+</html>

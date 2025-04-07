@@ -1,115 +1,143 @@
+
+/* ================= BASE STYLES ================= */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 /* Floating Chatbot Button */
 #chatbot-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #ffc904; /* Yellow */
-    color: black;
-    padding: 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 24px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffc904;
+  color: black;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Chat Window */
 #chat-window {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 350px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: none;
-    flex-direction: column;
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 350px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  z-index: 9999;
 }
 
-/* Header */
+/* Chat Header */
 #chat-header {
-    background:  #ffc904;
-    color: black;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: #ffc904;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #chat-header button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 /* Chat Body */
 #chat-body {
-    height: 300px;
-    overflow-y: auto;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
+
+
 
 /* Messages */
 .chat-message {
   display: flex;
-  align-items: flex-start;
   margin: 8px;
-  padding: 0;
-  border-radius: 5px;
-  max-width: 100%; /* Use the one you prefer (was 75% in your first block) */
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
-  gap: 2px; /* spacing between avatar and bubble */
+  gap: 5px;
+  align-items: flex-start;
 }
-
 
 .user-message {
   align-self: flex-end;
   flex-direction: row-reverse;
-  justify-content: flex-end;
-  margin-left: auto; /* ✅ Pushes it right */
   max-width: 75%;
 }
 
 .bot-message {
   align-self: flex-start;
-  justify-content: flex-start;
   max-width: 85%;
-  margin-right: auto; /* ✅ Pushes it left */
 }
 
-/* Message bubble itself */
 .message-bubble {
   background: #e0e0e0;
   color: black;
   padding: 10px 12px;
   border-radius: 10px;
-  margin: 0 8px;
-  width: 100%; /* Keep this for responsiveness */
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: pre-wrap;
+  position: relative; /* Required for ::after tail positioning */
 }
-
-
 
 .user-message .message-bubble {
-  background:   #000; /* Black bubble */
+  border-top-right-radius: 4px;
+  background: black;
   color: white;
-  /* max-width: 60%; or 80% depending on your preference */
 }
 
+/* Tail for user messages */
+.user-message .message-bubble::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: -8px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 0 8px 8px;
+  border-color: transparent transparent transparent black;
+}
+
+
 .bot-message .message-bubble {
+  border-top-left-radius: 4px;
   /* max-width: 60%; ⬅️ or try 80% or 75% for tighter bubbles */
   background: #f3f3f3; /* Soft gray */
   color: #000;
 }
+
+/* Tail for bot messages */
+.bot-message .message-bubble::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 8px 8px 0;
+  border-color: transparent #f3f3f3 transparent transparent;
+}
+
 
 .avatar {
   width: 32px;
@@ -119,12 +147,11 @@
   margin-top: 5px; /* ✅ Helps prevent it from hugging the top too much */
 }
 
-/* chat-appointment-form */
-/* Form inside chat bubble */
+/* Appointment Form */
 .chat-appointment-form {
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 8px;
 }
 
 .chat-appointment-form label {
@@ -132,32 +159,15 @@
   padding: 0;          /* ❌ Remove padding so it doesn’t look like a box */
   font-weight: bold;   /* Optional: makes labels clearer */
   font-size: 14px;
-}
+  }
 
 .chat-appointment-form input,
 .chat-appointment-form textarea {
-  margin-bottom: 10px;  /* ✅ Adds spacing only under input boxes */
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 8px;
   font-size: 14px;
-  font-family: inherit;
-  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
-
-/* .chat-appointment-form label,
-.chat-appointment-form input,
-.chat-appointment-form textarea {
-  margin: 0;           
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  font-family: inherit;
-  box-sizing: border-box;
-} */
 
 .chat-appointment-form button {
   background-color: #ffc904;
@@ -168,8 +178,8 @@
   cursor: pointer;
   font-weight: bold;
   align-self: flex-start;
-}
-
+  }
+  
 #appointment-form {
   max-width: 85%;
   margin-left: 10px;
@@ -177,20 +187,19 @@
 }
 
 .chat-appointment-btn {
-  background-color: #ffc904;  /* UWM yellow */
+  background: #ffc904;
   color: black;
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  font-family: inherit;
 }
 
-/* scroll button */
+/* Scroll Button */
 #scroll-to-bottom {
   position: absolute;
-  bottom: 65px; /* above the footer */
+  bottom: 65px;
   right: 15px;
   background: #ffc904;
   color: black;
@@ -199,36 +208,33 @@
   width: 36px;
   height: 36px;
   font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  display: none; /* Initially hidden */
+  display: none;
   z-index: 10;
+  opacity: 0.8; /* 👈 base value */
+  transition: opacity 0.3s ease; /* 👈 smooth effect */
 }
-
 
 #scroll-to-bottom:hover {
   opacity: 1;
 }
-
-
+  
 
 /* Chat Footer */
 #chat-footer {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ddd;
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
 }
 
 #user-input {
-    flex: 1;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
+  flex: 1;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
 }
 
 #chat-footer button {
-  background: #ffc904;  /* UWM Yellow */
+  background: #ffc904;
   color: black;
   border: none;
   padding: 5px 10px;
@@ -240,24 +246,13 @@
   background: #e0ae00;  /* Darker yellow on hover */
 }
 
-body,html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    height: 100%;
-    overflow-x: hidden;
-}
-
 /* Typing dots animation */
-.bot-message.typing {
+/* .bot-message.typing {
   opacity: 0.7;
   font-style: italic;
   animation: fadeInMessage 0.4s ease;
-}
+} */
 
-
-
-/* Header */
 /* Header Bar */
 .uwm-header {
   display: flex;
@@ -265,7 +260,6 @@ body,html {
   align-items: center;
   padding: 12px 30px;
   background-color: white;
-  /* border-bottom: 1px solid #e0e0e0; */
 }
 
 .uwm-logo {
@@ -289,7 +283,6 @@ body,html {
   text-decoration: underline;
 }
 
-/* Apply button (yellow pill) */
 .apply-btn {
   background-color: #ffc904;
   padding: 8px 16px;
@@ -299,16 +292,16 @@ body,html {
 
 .apply-btn:hover {
   background-color: #e0ae00;
-}
-
+  }
+  
 .dropdown-arrow {
   font-size: 12px;
   margin-left: 5px;
   vertical-align: middle;
   display: inline-block;
 }
-
-
+  
+  
 .search-btn {
   background-color: #ffc904;
   width: 36px;
@@ -321,17 +314,17 @@ body,html {
   cursor: pointer;
   transition: background 0.2s;
 }
-
-
-
+  
+  
+  
 .search-btn i {
   color: black;
   font-size: 20px;
   text-shadow: 1px 1px 1px black;
 }
-
-
-/* Divider bar */
+  
+  
+  /* Divider bar */
 .divider {
   height: 20px;
   width: 2px;
@@ -353,10 +346,9 @@ body,html {
   cursor: pointer;
 }
 
-
-/* Top Navigation Bar */
+/* Nav Bar */
 .top-nav {
-  background-color: white;
+  background: white;
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
   position: sticky;
@@ -379,7 +371,6 @@ body,html {
   text-decoration: none;
   color: black;
   padding: 10px;
-  transition: color 0.2s;
 }
 
 .top-nav li a:hover {
@@ -387,140 +378,566 @@ body,html {
   text-decoration: underline;
 }
 
-
-/* homepage video */
+/* Video Banner */
 .video-container {
-    position: relative;
-    width: 100%;
-    height: 80vh; /* Full viewport height */
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
 }
-  
+
 .video-container video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
-  
+
 .overlay-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-    z-index: 1;
-    width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  width: 90%;
 }
-  
+
 .overlay-text h1 {
-    font-size: 48px;
-    margin: 0;
+  font-size: 48px;
+  margin: 0;
 }
-  
+
 .overlay-text p {
-    font-size: 20px;
+  font-size: 20px;
 }
-  
-/* experience-section */
+
+/* Experience Section */
 .uwm-experience-section {
-    background-color: #fff;
-    padding: 60px 20px;
-    font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  padding: 60px 20px;
 }
-  
+
 .experience-content {
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
 }
-  
+
 .left-text {
-    flex: 1 1 50%;
+  flex: 1 1 50%;
 }
-  
+
 .left-text h2 {
-    font-size: 32px;
-    margin-bottom: 10px;
+  font-size: 32px;
+  margin-bottom: 10px;
 }
-  
+
 .yellow-bar {
-    width: 50px;
-    height: 5px;
-    background-color: #ffc904;
-    margin-bottom: 20px;
+  width: 50px;
+  height: 5px;
+  background-color: #ffc904;
+  margin-bottom: 20px;
 }
-  
+
 .left-text p {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #333;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
 }
-  
+
 .yellow-button {
-    display: inline-block;
-    background-color: #ffc904;
-    color: black;
-    text-decoration: none;
-    padding: 12px 20px;
-    font-weight: bold;
-    margin-top: 20px;
-    border-radius: 4px;
+  display: inline-block;
+  background-color: #ffc904;
+  color: black;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  border-radius: 4px;
 }
-  
+
 .yellow-button:hover {
-    background-color: #e0ae00;
+  background-color: #e0ae00;
 }
-  
+
 .right-images {
-    flex: 1 1 40%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-  
+
 .right-images img {
-    width: 100%;
-    border-radius: 4px;
-    object-fit: cover;
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
 }
-  
+
 .small-images {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
-  
+
 .small-images img {
-    width: 50%;
-}
-  
-/* animations*/
-
-/* fade in the message*/
-/* @keyframes fadeInMessage {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  width: 50%;
 }
 
-.chat-message {
-  animation: fadeInMessage 0.4s ease forwards;
-} */
 
-/* slide in the message*/
+/* research section */
+.research-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 30px;
+  background: #f7f7f7;
+  flex-wrap: wrap; /* ✅ mobile-friendly */
+}
+
+.research-image img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 4px;
+}
+
+.research-content {
+  max-width: 550px;
+}
+
+.research-content h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.research-content p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.research-content .yellow-bar {
+  width: 50px;
+  height: 5px;
+  background-color: #ffc904;
+  margin-bottom: 20px;
+}
+
+.research-content .yellow-button {
+  display: inline-block;
+  background-color: #ffc904;
+  color: black;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.research-content .yellow-button:hover {
+  background-color: #e0ae00;
+}
+
+/* UWM by the Numbers */
+.uwm-numbers {
+  background-color: #2d2d2d;
+  padding: 60px 20px;
+  color: white;
+  text-align: center;
+}
+
+.numbers-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.numbers-underline {
+  width: 40px;
+  height: 4px;
+  background-color: #ffc904;
+  margin: 0 auto 40px auto;
+}
+
+
+.numbers-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.number-block {
+  flex: 1;
+}
+
+.number-block h2 {
+  color: #ffc904;
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.number-block p {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+.vertical-divider {
+  width: 1px;
+  height: 150px;
+  background-color: #444; /* Subtle gray */
+}
+
+/* Hear From Our Panthers */
+.panther-testimonials {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+  color: #000;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: left;  /* 👈 Aligns the title to the left */
+  margin-left: 200px; /* Optional: adds slight spacing */
+}
+
+.yellow-underline {
+  width: 50px;
+  height: 5px;
+  background-color: #ffc904;
+  margin: 10px 0 30px 200px; /* 👈 Aligns underline with title */
+}
+
+.testimonials-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.testimonial-card {
+  flex: 1 1 300px;
+  max-width: 350px;
+  text-align: left;
+}
+
+.testimonial-img {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.testimonial-img img {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+
+.play-button {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #ffc904;
+  color: black;
+  padding: 8px 12px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.testimonial-card h3 {
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.testimonial-card .major {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.testimonial-card .quote {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* student life */
+.student-life {
+  background-color: #f9f9f9;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.student-life .section-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center; /* Ensure heading is centered */
+  margin: 0 auto;      /* Auto margin helps center block-level elements */
+  display: block;      /* Make sure it's treated as block */
+}
+
+
+.yellow-underline.center {
+  width: 40px;
+  height: 4px;
+  background-color: #ffc904;
+  margin: 10px auto 30px auto;
+}
+
+.student-life-subtext {
+  font-size: 18px;
+  color: #333;
+  max-width: 800px;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
+.student-life-subtext a {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.student-life-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.student-life-image {
+  flex: 1 1 45%;
+  min-width: 280px;
+}
+
+.student-life-image img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.student-life-text {
+  flex: 1 1 45%;
+  min-width: 280px;
+  text-align: left;
+}
+
+.student-life-item {
+  margin-bottom: 20px;
+}
+
+.student-life-item h4 {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #000;
+}
+
+.student-life-item p {
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Next Steps */
+.next-steps {
+  position: relative;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  height: 500px; /* adjust based on your layout */
+}
+
+.background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.next-steps-overlay {
+  position: relative;
+  z-index: 1;
+  padding: 100px 20px 60px;
+}
+
+
+.next-steps h2 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.next-steps p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.next-steps-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-yellow {
+  background-color: #ffc904;
+  border: none;
+  color: black;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-yellow:hover {
+  background-color: #e0b800;
+}
+
+/* Footer */
+.full-width-divider {
+  height: 8px;
+  background-color: #ffc904;
+  width: 100vw; /* Full viewport width */
+  margin: 0;
+  padding: 0;
+}
+
+.uwm-footer {
+  background-color: #333;
+  color: white;
+  padding: 50px 20px 20px;
+  font-size: 18px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  /* border-top: 4px solid #ffc904; */
+  padding-top: 40px;
+}
+
+.footer-logo {
+  flex: 1 1 250px;
+  margin-bottom: 30px;
+}
+
+.footer-logo img {
+  width: 160px;
+  margin-bottom: 10px;
+}
+
+.contact-icon {
+  margin-right: 5px;
+}
+
+.contact-link {
+  color: white;  /* or black depending on your background */
+  text-decoration: none;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+.footer-socials {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc904;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+
+.footer-links {
+  display: flex;
+  gap: 60px;
+  flex: 2;
+  flex-wrap: wrap;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-links ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #555;
+  padding-top: 15px;
+}
+
+.footer-bottom a {
+  margin: 0 15px;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+/* slide in the message */
 @keyframes slideInLeft {
   from {
     opacity: 0;
@@ -531,7 +948,7 @@ body,html {
     transform: translateX(0);
   }
 }
-
+  
 @keyframes slideInRight {
   from {
     opacity: 0;
@@ -542,17 +959,17 @@ body,html {
     transform: translateX(0);
   }
 }
-
-/* Apply to bot and user message bubbles */
+  
+  /* Apply to bot and user message bubbles */
 .bot-message {
   animation: slideInLeft 0.3s ease;
 }
-
+  
 .user-message {
   animation: slideInRight 0.3s ease;
 }
-
-/* Chatbot slide-in and slide-out animation */
+  
+  /* Chatbot slide-in and slide-out animation */
 @keyframes slideInUp {
   from {
     opacity: 0;
@@ -563,7 +980,7 @@ body,html {
     transform: translateY(0);
   }
 }
-
+  
 @keyframes slideOutDown {
   from {
     opacity: 1;
@@ -574,12 +991,123 @@ body,html {
     transform: translateY(30px);
   }
 }
-
+  
 /* Apply animation classes */
 #chat-window.opening {
   animation: slideInUp 0.3s ease forwards;
 }
-
+  
 #chat-window.closing {
   animation: slideOutDown 0.3s ease forwards;
+}
+
+.typing-indicator .message-bubble {
+  background: #f3f3f3;
+  padding: 10px 15px;
+  border-radius: 20px;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.typing-indicator .dot {
+  width: 8px;
+  height: 8px;
+  background-color: #666;
+  border-radius: 50%;
+  animation: bounce 1.3s infinite;
+}
+
+.typing-indicator .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-indicator .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* ============ RESPONSIVE STYLES ============ */
+@media (max-width: 768px) {
+  .uwm-header {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px;
+  }
+
+  .uwm-logo {
+    height: 48px;
+    margin-bottom: 10px;
+  }
+
+  .uwm-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .top-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .top-nav li a {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .overlay-text h1 {
+    font-size: 28px;
+  }
+
+  .overlay-text p {
+    font-size: 16px;
+  }
+
+  .experience-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .numbers-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .vertical-divider {
+    display: none;
+  }
+
+  .number-block {
+    text-align: center;
+  }
+
+  .testimonials-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+  #chat-window {
+    width: 95vw;
+    bottom: 70px;
+    right: 2.5vw;
+  }
+
+  #chatbot-button {
+    bottom: 15px;
+    right: 15px;
+  }
 }

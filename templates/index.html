@@ -42,19 +42,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UWM Chatbot</title>
+    <link rel="icon" type="image/svg" href="{{ url_for('static', filename='uploads/favicon.svg') }}">
 
     <!-- Fonts & Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='chatbot.css') }}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
 
     <!-- Header -->
     <div class="uwm-header">
-        <img src="{{ url_for('static', filename='uwm_logo.svg') }}" alt="UWM Logo" class="uwm-logo" />
+        <img src="{{ url_for('static', filename='uploads/uwm_logo.svg') }}" alt="UWM Logo" class="uwm-logo" />
         
         <div class="uwm-links">
         <a href="#">Request Info</a>
@@ -87,7 +90,7 @@
     <!-- Fullscreen Video Banner -->
     <div class="video-container">
         <video autoplay muted loop playsinline>
-            <source src="{{ url_for('static', filename='homepage_video.mp4') }}" type="video/mp4">
+            <source src="{{ url_for('static', filename='uploads/homepage_video.mp4') }}" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
         <div class="overlay-text">
@@ -122,7 +125,190 @@
         </div>
     </div>
 
+    <!-- Leading Research Section -->
+    <div class="research-section">
+        <div class="research-image">
+          <img src="{{ url_for('static', filename='uploads/leading_research.jpg') }}" alt="Research Image" />
+        </div>
+        <div class="research-content">
+          <h2>Leading Research</h2>
+          <div class="yellow-bar"></div>
+          <p>
+            UWM faculty and students embrace challenges and ask big questions.
+            They’re at the forefront of discovery, working hard to find tangible
+            solutions that drive economic growth and social progress.
+          </p>
+          <a href="#" class="yellow-button">Discover Research Opportunities</a>
+        </div>
+    </div>
+
+    <!-- UWM by the Numbers -->
+    <section class="uwm-numbers">
+        <h2 class="numbers-title">UWM by the Numbers</h2>
+        <div class="numbers-underline"></div>
+      
+        <div class="numbers-container">
+          <div class="number-block">
+                <h2>209</h2>
+                <p>Academic Programs</p>
+          </div>
+      
+          <div class="vertical-divider"></div>
+      
+          <div class="number-block">
+                <h2>17:1</h2>
+                <p>Student-to-Faculty Ratio</p>
+          </div>
+      
+          <div class="vertical-divider"></div>
+      
+          <div class="number-block">
+                <h2>22,882</h2>
+                <p>Students from 88 Countries</p>
+          </div>
+        </div>
+    </section>
+      
+    <!-- Hear From Our Panthers-->
+    <section class="panther-testimonials">
+        <h2 class="section-title">Hear From Our Panthers</h2>
+        <div class="yellow-underline"></div>
+      
+        <div class="testimonials-container">
+      
+          <div class="testimonial-card">
+            <div class="testimonial-img">
+              <img src="{{ url_for('static', filename='uploads/panther1.jpg') }}" alt="Scotlyn singing">
+              <div class="play-button">▶</div>
+            </div>
+            <h3>Scotlyn</h3>
+            <p class="major">Music major</p>
+            <p class="quote">
+              “The music program has completely changed my life. UWM helped me prepare for my career by giving me the training I need, but also by giving me experience outside of school to be a working musician.”
+            </p>
+          </div>
+      
+          <div class="testimonial-card">
+            <div class="testimonial-img">
+              <img src="{{ url_for('static', filename='uploads/panther2.jpg') }}" alt="Brenden in lab">
+              <div class="play-button">▶</div>
+            </div>
+            <h3>Brenden</h3>
+            <p class="major">Freshwater Sciences MS</p>
+            <p class="quote">
+              “The accomplishment I’m most proud of in my graduate program is working for the McClellan Lab. The grad program does a really good job of giving us hands-on experience.”
+            </p>
+          </div>
+      
+          <div class="testimonial-card">
+            <div class="testimonial-img">
+              <img src="{{ url_for('static', filename='uploads/panther3.jpg') }}" alt="Yazmin in classroom">
+              <div class="play-button">▶</div>
+            </div>
+            <h3>Yazmin</h3>
+            <p class="major">Education major</p>
+            <p class="quote">
+              “At UWM, I discovered my potential is limitless. I think what UWM does is prepare us for post-graduation. I studied abroad in Seville, Spain, and it taught me how to be independent.”
+            </p>
+          </div>
+      
+        </div>
+    </section>
+
+
+    <!-- student-life -->
+    <section class="student-life">
+        <h2 class="section-title">Student Life</h2>
+        <div class="yellow-underline center"></div>
+        <p class="student-life-subtext">
+          Campus life is an important part of the college experience, providing opportunities to try new things and make lifelong friendships. 
+          <a href="#">Explore life at UW-Milwaukee.</a>
+        </p>
+      
+        <div class="student-life-content">
+          <div class="student-life-image">
+            <img src="{{ url_for('static', filename='uploads/student_life.jpg') }}" alt="Students sitting on lawn with fountain">
+          </div>
+          <div class="student-life-text">
+            <div class="student-life-item">
+              <h4><u>Housing</u></h4>
+              <p>View comfortable and convenient on-campus and community housing options that will enhance your living experience during your academic journey.</p>
+            </div>
+            <div class="student-life-item">
+              <h4><u>Athletics</u></h4>
+              <p>Experience the thrill of competition and camaraderie through UWM’s Division 1 athletics program. Join your peers in the stands to cheer on your Panthers.</p>
+            </div>
+            <div class="student-life-item">
+              <h4><u>Student Support Services</u></h4>
+              <p>Find the academic and personal support tools you need to excel both inside and outside the classroom.</p>
+            </div>
+            <div class="student-life-item">
+              <h4><u>Health & Wellness</u></h4>
+              <p>Take advantage of recreational programs, health and wellness services, and more at UWM. See how we foster a healthy and active lifestyle for all students.</p>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- Next Steps Section -->
+    <section class="next-steps">
+        <img src="{{ url_for('static', filename='uploads/uwm_campus_aerial.jpg') }}" alt="UWM Campus Aerial" class="background-img">
+        
+        <div class="next-steps-overlay">
+          <h2>Next Steps</h2>
+          <p>Apply to UWM, where you’ll realize your potential.</p>
+          <div class="next-steps-buttons">
+                <button class="btn-yellow">Request Information</button>
+                <button class="btn-yellow">Apply</button>
+                <button class="btn-yellow">Visit</button>
+          </div>
+        </div>
+    </section>
     
+    <!-- Footer Section divder -->
+    <div class="full-width-divider"></div> <!-- Add this line -->
+
+    <!-- Footer Section -->
+    <footer class="uwm-footer">
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="{{ url_for('static', filename='uploads/uwm_logo_white.svg') }}" alt="UWM Logo">
+                <p>2100 E. Kenwood Blvd.<br>Milwaukee WI 53211</p>
+                <a href="https://uwm.edu/contact/" class="contact-link">
+                    <span class="contact-icon"><i class="fa-solid fa-address-book"></i></span> Contact
+                </a>
+
+                <div class="footer-socials">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+    
+            <div class="footer-links">
+                <ul>
+                <li><a href="#">Map & Directory</a></li>
+                <li><a href="#">Safety</a></li>
+                <li><a href="#">Free Speech</a></li>
+                <li><a href="#">Employment</a></li>
+                </ul>
+                <ul>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">For Business & Community</a></li>
+                <li><a href="#">For Media</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+        <a href="#">Web Privacy Statement</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Feedback</a>
+        </div>
+    </footer>
+
     
     <!-- Floating Chatbot (unchanged) -->
     <div id="chatbot-button" onclick="toggleChat()">💬</div>

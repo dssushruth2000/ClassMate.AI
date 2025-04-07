@@ -119,16 +119,33 @@ function sendMessage() {
     // chatBody.scrollTop = chatBody.scrollHeight;
 
     // Show animated typing indicator
+    // var chatBody = document.getElementById("chat-body");
+    // var typingIndicator = document.createElement("div");
+    // typingIndicator.classList.add("bot-message", "typing");
+
+    // var typingBubble = document.createElement("div");
+    // typingBubble.classList.add("message-bubble");
+
+    // typingBubble.innerText = "⏳ Bot is typing...";
+    // typingIndicator.appendChild(typingBubble);
+    // chatBody.appendChild(typingIndicator);
+
     var chatBody = document.getElementById("chat-body");
-    var typingIndicator = document.createElement("div");
-    typingIndicator.classList.add("bot-message", "typing");
+    const typingIndicator = document.createElement("div");
+    typingIndicator.className = "chat-message bot-message typing-indicator";
 
-    var typingBubble = document.createElement("div");
-    typingBubble.classList.add("message-bubble");
+    const typingBubble = document.createElement("div");
+    typingBubble.className = "message-bubble typing";
 
-    typingBubble.innerText = "⏳ Bot is typing...";
+    for (let i = 0; i < 3; i++) {
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    typingBubble.appendChild(dot);
+    }
+
     typingIndicator.appendChild(typingBubble);
     chatBody.appendChild(typingIndicator);
+
 
     // Scroll to bottom
     setTimeout(() => {
@@ -234,9 +251,10 @@ function displayMessage(text, className) {
 
     // Append content in order based on message type
     if (className === "user-message") {
+        messageDiv.appendChild(avatar); // Avatar on right
         messageDiv.appendChild(bubble);
         // messageDiv.appendChild(messageContent);
-        messageDiv.appendChild(avatar); // Avatar on right
+        // messageDiv.appendChild(avatar); // Avatar on right
     } else {
         messageDiv.appendChild(avatar); // Avatar on left
         // messageDiv.appendChild(messageContent);

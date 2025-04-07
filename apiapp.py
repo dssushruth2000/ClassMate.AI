@@ -553,15 +553,16 @@ def chatbot():
 
 
 # 🔹 New API Endpoint to View Chat History (Session Only)
-@app.route("/chat_history", methods=["GET"])
-def get_chat_history():
-    """Retrieve chat history for the active session."""
-    return jsonify({"chat_history": chat_history})
+# @app.route("/chat_history", methods=["GET"])
+# def get_chat_history():
+#     """Retrieve chat history for the active session."""
+#     return jsonify({"chat_history": chat_history})
 
 #uncomment below code if you want to see the output in webpage
 @app.route("/")
 def chat_interface():
     return render_template("index.html")
+
 
 #to handle appointment form submissions
 @app.route("/submit_appointment", methods=["POST"])
@@ -601,7 +602,7 @@ def submit_appointment():
 
     # 🔹 Send confirmation email
     try:
-        msg = Message("📅 New Appointment Booked!",
+        msg = Message("📅 New Appointment Booked! ✅",
                 sender=app.config['MAIL_USERNAME'],
                 # recipients=[email])  # or use your own email to receive notification
                 recipients=[email, notify_email]) #for both of them
@@ -621,16 +622,16 @@ def submit_appointment():
         # """
 
         msg.html = f"""
-        <div style="font-family: 'Segoe UI', sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
-        <p>Hi <strong>{name}</strong>,</p>
-        <p>Thanks for booking an appointment! Here's what we received:</p>
-        <ul style="line-height: 1.6;">
-            <li><strong>🗓️ Date:</strong> {date}</li>
-            <li><strong>🕒 Time:</strong> {time_val}</li>
-            <li><strong>💬 Message:</strong> {message}</li>
-        </ul>
-        <p style="margin-top: 10px;">We’ll get back to you if needed. Have a great day!</p>
-        <p style="color: #555;">– <em>UWM Chatbot</em></p>
+        <div style="font-family: 'Segoe UI', sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 8px; max-width: 600px;">
+            <p>👋 Hi <strong>{name}</strong>,</p>
+            <p>Thanks for booking an appointment! Here's what we received:</p>
+            <ul style="line-height: 1.6;">
+                <li><strong>🗓️ Date:</strong> {date}</li>
+                <li><strong>🕒 Time:</strong> {time_val}</li>
+                <li><strong>💬 Message:</strong> {message}</li>
+            </ul>
+            <p style="margin-top: 10px;">We’ll get back to you if needed. Have a great day! 😊</p>
+            <p style="color: #555;">– <em>UWM Chatbot</em></p>
         </div>
         """
 
@@ -643,16 +644,24 @@ def submit_appointment():
     # Optionally return a thank you message (or redirect)
     return "<script>alert('Appointment submitted successfully!'); window.history.back();</script>"
 
-from flask import send_file
+@app.route("/admin/appointments-data")
+def get_appointments_data():
+    appointments = []
+    csv_path = "appointments/appointments.csv"  # Match your write path
 
-@app.route("/download_appointments")
-def download_appointments():
-    try:
-        return send_file("appointments/appointments.csv", as_attachment=True)
-    except Exception as e:
-        return f"Error: {e}"
- 
+    if not os.path.exists(csv_path):
+        return jsonify([])  # Return empty list if file doesn't exist yet
 
+    with open(csv_path, newline="") as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            appointments.append(row)
+    return jsonify(appointments)
+  
+
+@app.route("/admin/dashboard")
+def admin_dashboard():
+    return render_template("admin.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
