@@ -486,8 +486,17 @@ def search_gemini(user_query, chat_memory):
     **ALWAYS return a structured, clean response.**
     **DO NOT randomly change the structure** or rephrase in an inconsistent way.     
     **Use Markdown formatting (`**bold**`, `- bullets`, `[links](URL)`) to make responses clear.**
-    Always Do NOT respond in JSON or code format.        
+    If the question is about a **faculty member** or **professor**, only give name, email, phone, office, and profile link.
+    If the user asks for **more information** or "tell me everything about" the professor, include the full `profile_content` also but without publications.
+    Always Do NOT respond in JSON or code format.
+    Do NOT wrap responses inside triple backticks or code blocks like ```json or any kind of ``` block. ALWAYS return plain Markdown or HTML-like format directly.        
     If the answer is not found in this dataset, reply with: "I could not find this information. Please feel free to visit the UWM Website https://uwm.edu/"
+
+    ⚠️ Important link formatting instructions:
+    - All hyperlinks must be shown in Markdown style like: `[link text](https://example.com)`
+    - Never break URLs across lines. The entire Markdown link must appear on one line.
+    - Do not display raw URLs like "https://example.com" alone. Always embed them in meaningful text.
+    - Do NOT split link text and link URL into different lines or paragraphs under any condition.
 
     Previous conversation history:
     {chat_history_text}

@@ -212,6 +212,31 @@ function submitAppointment(event) {
     });
 }
 
+//Use this below if you want typing response like chatgpt oresle remove this function
+function typeBotResponse(element, text, onComplete, speed = 10) {
+    let i = 0;
+    function typeChar() {
+        if (i < text.length) {
+            element.innerText += text.charAt(i);  // plain text typing
+            i++;
+
+            // Scroll the chat container while typing
+            document.getElementById("chat-body").scrollTo({
+                top: document.getElementById("chat-body").scrollHeight,
+                behavior: "smooth"
+            });
+
+            setTimeout(typeChar, speed);
+        } else if (onComplete) {
+            onComplete();  // Replace raw text with full rich HTML
+        }
+    }
+    typeChar();
+}
+
+
+
+
 
 function displayMessage(text, className) {
     const chatBody = document.getElementById("chat-body");
@@ -243,7 +268,32 @@ function displayMessage(text, className) {
 
     const bubble = document.createElement("div");
     bubble.classList.add("message-bubble");
-    bubble.innerHTML = html.trim();
+    // bubble.innerHTML = html.trim(); //orelse uncomment this if you remove the below one
+
+    //Use this below if you want typing response like chatgpt
+    bubble.textContent = ""; // Start empty
+    if (className === "bot-message") {
+        typeBotResponse(bubble, text, () => {
+            // After typing ends, convert Markdown to HTML and render properly
+            let html = converter.makeHtml(text);
+            html = html.replace(/(^|[^">])(https?:\/\/[^\s)]+)/g, '$1<a href="$2" target="_blank">$2</a>');
+            html = html.replace(/\n/g, "<br>");
+            bubble.innerHTML = html.trim();
+
+             // 🟡 Scroll again after rich HTML is rendered
+             requestAnimationFrame(() => {
+                setTimeout(() => {
+                  document.getElementById("chat-body").scrollTo({
+                    top: document.getElementById("chat-body").scrollHeight,
+                    behavior: "smooth"
+                  });
+                }, 20); // You can experiment with delay between 10–30ms
+            });
+        });        
+    } else {
+        bubble.innerHTML = html.trim();
+    }
+    // uptill here - typing response code
 
     // Force a reflow (browser recalculates layout & events)-- still not confirmed workinh or not, if not remove this
     bubble.offsetHeight;
