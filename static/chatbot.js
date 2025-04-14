@@ -56,7 +56,8 @@ function toggleChat() {
                 displayMessage("Beep boop 🤖... just kidding.", "bot-message");
 
                 setTimeout(() => {
-                    displayMessage("I’m the UWM Chatbot — what can I dig up for you today?", "bot-message");
+                    // displayMessage("I’m the UWM Chatbot — what can I dig up for you today?", "bot-message");
+                    displayMessage("I’m the UWM Chatbot — here to help you with anything related to the **Computer Science Department**! 💻📚", "bot-message");
                 }, 1000);
             }, 1000);
         }
