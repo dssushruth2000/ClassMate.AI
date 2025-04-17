@@ -251,7 +251,7 @@ function displayMessage(text, className) {
     avatar.classList.add("avatar");
     avatar.src = className === "user-message"
         ? "static/avatar/User_Avatar.svg"
-        : "static/avatar/Chatbot_Avatar.jpg";
+        : "static/avatar/Bot_Avatar.svg";
 
     // Message content container
     // const messageContent = document.createElement("div");
@@ -288,7 +288,7 @@ function displayMessage(text, className) {
                     top: document.getElementById("chat-body").scrollHeight,
                     behavior: "smooth"
                   });
-                }, 20); // You can experiment with delay between 10–30ms
+                }, 10); // You can experiment with delay between 10–30ms
             });
         });        
     } else {

@@ -493,7 +493,7 @@ def search_gemini(user_query, chat_memory):
     If the answer is not found in this dataset, reply with: "I could not find this information. Please feel free to visit the UWM Website https://uwm.edu/"
 
     ⚠️ Important link formatting instructions:
-    - All hyperlinks must be shown in Markdown style like: `[link text](https://example.com)`
+    - **All hyperlinks must be shown in Markdown style like: `[link text](https://example.com)`**
     - Never break URLs across lines. The entire Markdown link must appear on one line.
     - Do not display raw URLs like "https://example.com" alone. Always embed them in meaningful text.
     - Do NOT split link text and link URL into different lines or paragraphs under any condition.
