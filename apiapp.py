@@ -488,12 +488,18 @@ def search_gemini(user_query, chat_memory):
     **Use Markdown formatting (`**bold**`, `- bullets`, `[links](URL)`) to make responses clear.**
     If the question is about a **faculty member** or **professor**, only give name, email, phone, office, and profile link.
     If the user asks for **more information** or "tell me everything about" the professor, include the full `profile_content` also but without publications.
+    When including `profile_content`, structure the response clearly:
+        - Break content into bullet points or short paragraphs.
+        - Highlight key details using bold text (e.g., **Email**, **Office**, **Research Interests**).
+        - Group related details together under small section headers if helpful.
+        - Do not show it as one long block of raw text.
+        - Do not include unnecessary line breaks after every word or short phrase.
     Always Do NOT respond in JSON or code format.
     Do NOT wrap responses inside triple backticks or code blocks like ```json or any kind of ``` block. ALWAYS return plain Markdown or HTML-like format directly.        
     If the answer is not found in this dataset, reply with: "I could not find this information. Please feel free to visit the UWM Website https://uwm.edu/"
 
     ⚠️ Important link formatting instructions:
-    - **All hyperlinks must be shown in Markdown style like: `[link text](https://example.com)`**
+    - All hyperlinks must be shown in Markdown style like: `[link text](https://example.com)`
     - Never break URLs across lines. The entire Markdown link must appear on one line.
     - Do not display raw URLs like "https://example.com" alone. Always embed them in meaningful text.
     - Do NOT split link text and link URL into different lines or paragraphs under any condition.
