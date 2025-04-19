@@ -490,7 +490,7 @@ def search_gemini(user_query, chat_memory):
     If the user asks for **more information** or "tell me everything about" the professor, include the full `profile_content` also but without publications.
     When including `profile_content`, structure the response clearly:
         - Break content into bullet points or short paragraphs.
-        - Highlight key details using bold text (e.g., **Email**, **Office**, **Research Interests**).
+        - Highlight key details using bold text.
         - Group related details together under small section headers if helpful.
         - Do not show it as one long block of raw text.
         - Do not include unnecessary line breaks after every word or short phrase.
