@@ -934,6 +934,12 @@ body, html {
   text-decoration: underline;
 }
 
+.footer-disclaimer {
+  font-size: 14px;
+  color: #ccc;
+  text-align: center;
+  margin-top: 20px;
+}
 
 
 
