@@ -1117,3 +1117,14 @@ body, html {
     right: 15px;
   }
 }
+
+#user-input,
+#chat-footer button {
+  font-size: 16px;  /* Required to stop mobile zoom */
+}
+
+#chat-window {
+  max-height: 100vh;
+  overflow: hidden;
+  touch-action: manipulation;
+}
