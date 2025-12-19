@@ -103,7 +103,7 @@ def search_gemini(user_query, chat_memory):
 
     for attempt in range(retries):
         try:
-            model = genai.GenerativeModel("gemini-2.0-flash")
+            model = genai.GenerativeModel("gemini-2.5-flash")
             response = model.generate_content(prompt)
 
             if response.text:
