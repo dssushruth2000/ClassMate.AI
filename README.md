@@ -1,11 +1,8 @@
-===========================================================================================
-   UWM Chatbot: An LLM Assistant for the Computer Science Website - README (LOCAL USE)
-===========================================================================================
-
-Project: AI Chatbot for UWM Computer Science Department  
+# College Chatbot: An LLM Assistant for the Computer Science Website
+-------------------------------------------------------------------
+Project: AI Chatbot for Computer Science Department  
 Developer: Sushruth Danivasa Sridhar  
-Advisor: Prof. Rohit Kate  
-Program: MS in Computer Science, University of Wisconsin–Milwaukee
+Advisor: Prof. Rohit Kate
 
 -----------------------------------------------------
 Disclaimer
