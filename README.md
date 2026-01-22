@@ -1,8 +1,7 @@
-# College Chatbot: An LLM Assistant for the Computer Science Website
+# ClassMate.AI: An LLM Assistant for the Computer Science Website
 -------------------------------------------------------------------
-Project: AI Chatbot for Computer Science Department  
+Project: ClassMate.AI  
 Developer: Sushruth Danivasa Sridhar  
-Advisor: Prof. Rohit Kate
 
 -----------------------------------------------------
 Disclaimer
@@ -24,7 +23,7 @@ The bot is powered by Google Gemini API and is trained using structured JSON dat
 
 Features:
 - Chatbot answers queries based only on UWM CS web data
-- Real-time chat with animations, avatars, Markdown formatting
+- Real-time chat with animations, avatars, and Markdown formatting
 - In-chat appointment booking form
 - Appointment data saved in CSV and email confirmations sent
 - Admin dashboard to monitor appointment bookings
@@ -33,7 +32,7 @@ Features:
 HOW TO RUN THE WEBSCRAPING MODULES
 -----------------------------------------------------
 
-If you wish to regenerate the dataset from UWM websites using the scraping scripts, follow these steps:
+If you wish to regenerate the dataset from the UWM websites using the scraping scripts, follow these steps:
 
 All the structured JSON data used by the chatbot was generated using the notebook:
 📁 Web_scraping_from_website.ipynb
@@ -111,7 +110,7 @@ This chatbot is also hosted on Microsoft Azure for demonstration purposes.
 You can optionally try the **Live Demo** here:  
 https://college-chatbot-gde7a6atdygbd0da.centralus-01.azurewebsites.net/
 
-(Note: Some features like email may be restricted in the demo.)
+(Note: Some features, like email, may be restricted in the demo.)
 
 -----------------------------------------------------
 NOTES
