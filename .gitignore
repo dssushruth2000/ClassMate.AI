@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Environment variables
+.env
+.env.*
+
+# Build / packaging
+dist/
+build/
+*.egg-info/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Flask uploads/static (if you don't want to commit large uploads)
+static/uploads/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Mac/Windows specific
+*.swp
+*.swo
+
+# Ignore sensitive files
+credentials.json
+service_account.json
