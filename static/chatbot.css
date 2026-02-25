@@ -11,16 +11,161 @@ body, html {
 
 /* Floating Chatbot Button */
 #chatbot-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #ffc904;
-  color: black;
-  padding: 15px;
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  background: linear-gradient(135deg, #ffc904 0%, #ffb700 100%);
+  color: #1a1a2e;
+  padding: 18px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 24px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 28px;
+  box-shadow: 0 12px 40px rgba(255, 201, 4, 0.4), 0 0px 20px rgba(255, 183, 0, 0.3);
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: floatModern 4s ease-in-out infinite;
+  width: 64px;
+  height: 64px;
+}
+
+#chatbot-button::before {
+  content: "";
+  display: none;
+}
+
+#chatbot-button:hover {
+  transform: scale(1.12) translateY(-5px);
+  box-shadow: 0 16px 50px rgba(255, 201, 4, 0.5), 0 0px 30px rgba(255, 183, 0, 0.4);
+}
+
+#chatbot-button:active {
+  transform: scale(0.95);
+}
+
+@keyframes floatModern {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 59, 95, 0.5);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(255, 59, 95, 0.8);
+  }
+}
+
+/* Chat Tooltip */
+#chat-tooltip {
+  position: fixed;
+  bottom: 130px;
+  right: 65px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 25px 70px rgba(102, 126, 234, 0.45), 0 12px 30px rgba(118, 75, 162, 0.3), inset 0 1px 1.5px rgba(255, 255, 255, 0.35);
+  z-index: 9998;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: slideInTooltipModern 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  max-width: 240px;
+  text-align: center;
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+#chat-tooltip:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 1) 100%);
+  box-shadow: 0 30px 80px rgba(102, 126, 234, 0.55), 0 15px 40px rgba(118, 75, 162, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+#chat-tooltip::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+#chat-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  right: 30px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 12px 12px 0 12px;
+  border-color: rgba(102, 126, 234, 0.95) transparent transparent transparent;
+  filter: drop-shadow(0 3px 8px rgba(102, 126, 234, 0.4));
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+#chat-tooltip:hover::after {
+  border-color: rgba(102, 126, 234, 1);
+  filter: drop-shadow(0 4px 12px rgba(102, 126, 234, 0.6));
+}
+
+.tooltip-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideInTooltipModern {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.5;
+  }
 }
 
 /* Chat Window */
@@ -96,6 +241,9 @@ body, html {
   overflow-wrap: break-word;
   white-space: pre-wrap;
   position: relative; /* Required for ::after tail positioning */
+  max-width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
 }
 
 .user-message .message-bubble {
@@ -138,6 +286,25 @@ body, html {
   border-color: transparent #f3f3f3 transparent transparent;
 }
 
+/* Links in messages */
+.message-bubble a {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Lists in messages */
+.message-bubble ul,
+.message-bubble ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.message-bubble li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 
 .avatar {
   width: 32px;

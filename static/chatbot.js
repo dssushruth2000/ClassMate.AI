@@ -32,6 +32,7 @@ let greeted = false; // Global flag
 
 function toggleChat() {
     const chatWindow = document.getElementById("chat-window");
+    const tooltip = document.getElementById("chat-tooltip");
     const isHidden = chatWindow.style.display === "none" || chatWindow.style.display === "";
 
     if (isHidden) {
@@ -39,6 +40,11 @@ function toggleChat() {
         chatWindow.style.display = "flex";
         chatWindow.classList.remove("closing");
         chatWindow.classList.add("opening");
+        
+        // Hide tooltip when chat opens
+        if (tooltip) {
+            tooltip.style.display = "none";
+        }
 
         // Send greeting only the first time
         if (!greeted) {
@@ -69,6 +75,10 @@ function toggleChat() {
 
         setTimeout(() => {
             chatWindow.style.display = "none";
+            // Show tooltip when chat closes
+            if (tooltip) {
+                tooltip.style.display = "flex";
+            }
         }, 300); // Match the animation duration in CSS
     }
 }
@@ -462,6 +472,13 @@ function playSound(type) {
 //     chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll to latest message
 // }
 
+
+// Auto-open chatbot when page loads
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+        toggleChat();
+    }, 500); // 500ms delay to ensure DOM is fully ready
+});
 
   
 
